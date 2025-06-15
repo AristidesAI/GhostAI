@@ -1,9 +1,6 @@
-# Ghost.AI.internal
+## Ghost AI
 
-# Mice.ai-internal
-Internal files for Mice.ai Game development - Files stored here for backup
 
-### AI Project Brief: Vertical 'Among Us' Style Mobile Game Prototype
 #### Project Goal:
 To develop a technical prototype for a Unity-based mobile game for iOS. This prototype will serve as the foundational framework for a future multiplayer game. The core of this project is to successfully replicate the movement, 2.5D perspective, and unique vision/lighting mechanics of the game "Among Us," but adapt them for a vertical screen orientation.
 1. High-Level Concept
