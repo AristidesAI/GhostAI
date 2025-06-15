@@ -1,16 +1,16 @@
-## Ghost AI
+# Ghost AI
 
-
-#### Project Goal:
+## Project Goal
 To develop a technical prototype for a Unity-based mobile game for iOS. This prototype will serve as the foundational framework for a future multiplayer game. The core of this project is to successfully replicate the movement, 2.5D perspective, and unique vision/lighting mechanics of the game "Among Us," but adapt them for a vertical screen orientation.
-1. High-Level Concept
+## High-Level Concept
 The game is a top-down 2.5D action game where the player controls a ghost character on a single, contained map. The primary user experience is built around exploration and navigation within a world where visibility is limited. The game must feel intuitive and immersive on an iPhone, with a user interface that supports single-handed play.
 Inspiration: The primary inspiration is "Among Us." We are specifically focused on emulating its:
 Movement & Animation Style: Simple, fluid 8-directional movement with distinct idle and running animations.
 Vision & Lighting System: A dynamic "cone of vision" that emanates from the player. This light is realistically blocked by walls and other environmental objects, creating shadows and hiding areas from view.
 2.5D Camera Perspective: A top-down view that still provides a sense of depth.
 Key Adaptation: The most significant change from the inspiration is the vertical viewport. All gameplay, UI, and camera work must be optimized for a portrait orientation on an iPhone.
-2. Core Gameplay Features & Mechanics
+
+## Core Gameplay Features & Mechanics
 #### Player Character & Control:
 The player controls a single ghost character.
 Movement is handled by a virtual joystick located at the bottom-center of the screen. This joystick must be responsive and visually unobtrusive.
@@ -41,5 +41,5 @@ Configurable: The size, dead zone, and transparency levels (active vs. inactive)
 Use this project brief as the guiding context for the entire development process. When you are asked to generate a specific C# script (like PlayerController.cs or FieldOfView.cs) using the prompts from the other document, this brief provides the "why" behind the request. It explains how each individual script fits into the larger game system and the overall player experience we are trying to achieve.
 
 
-### Artwork Concepts
+## Artwork Concepts
 ![Idle](PrototypeAssets/GhostiOSIcons/Ghost.AI-iOS-ClearDark-1024x1024@2x.png)
