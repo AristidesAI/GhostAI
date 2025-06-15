@@ -45,4 +45,4 @@ Use this project brief as the guiding context for the entire development process
 
 
 ### Artwork Concepts
-![Idle](Assets_copy/Sprites/Idle/Layer-14.png)
+![Idle](PrototypeAssets/GhostiOSIcons/Ghost.AI-iOS-ClearDark-1024x1024@2x.png)
