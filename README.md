@@ -27,29 +27,40 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - Keyboard controls (WASD/Arrows/E to "tag") must also be implemented for easy testing within the Unity Editor.
 
 #### Build 1.0.1 In the current build of the project, The working features are:
+
+The player character & AI Player has two basic animation states: "Idle" and "Running." The appropriate animation should play based on whether the character is moving. There are three placeholder AI characters. These AI will wander the map randomly, also featuring idle/run animations and interacting with the collision
+
 - A player character with advanced movement (acceleration and deceleration).
 - A responsive virtual joystick and keyboard controls.
 - Player animations with dynamic speed and correct sprite flipping.
 - Basic AI characters that wander the map.
+- Basic CapsuleCollider2D colliders for the player & AI player
+- Basic collision mechanics on the walls
+- Game layers: Background|Midground|Player|Obstacles|Foreground 
 - AI animations with dynamic speed and correct sprite flipping.
 - A smooth camera that follows the player.
 
 #### Build 2.0.1 What needs to be implemented in this build for further testing, Not the full functionalty:
+
+- Procedural Maze Generation Functionality as described below, this is required for the AI functionality to work properly with the maze system. The AI player needs to have a full view of the maze generation and its pathways. The AI scripts and Maze generation scripts should talk to one another 
 - AI functionality described below - In future builds we will implement a difficulty setting so this should be considered when implementing the AI in this build
-- Procedural Maze Generation Functionality as described below
 - Tagging mechanic, Tagging button, a scoring system to count the number of NPC AI Players that the Human Player has Tagged
+
+#### Build 3.0.1 What needs to be implemented in the next build for further testing, Not the full functionalty:
+
 - A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last NPC AI Player is tagged and the game finishes
 - UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
-  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation 
+  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation
+    
+#### Build 4.0.1 What needs to be implemented for full game build functionality and publishing:
 
-#### Build 3.0.1 What needs to be implemented for full game build functionality and publishing:
 - Player colors. Multiple sprite animations with different colors
 - iOS performance optimisations for running on device (iPhone Latest Release)
 - Gamesounds, Player walking "tip-tap" 
 - Full game menu with Start Menu, Credits, Settings= Difficulty settings for the NPC AI Players, Sound on/off. In game settings Pause menu, Continue, Restart, Quit to main menu. 
-- 
 
 #### What needs to be implemented after release, For further updates:
+
 - Multiplayer Functionality (Netcode)
   - Proximity based voice chat
   - Netcode implementation - Rollback netcode
@@ -72,8 +83,10 @@ The primary directive is to avoid being tagged by the human-controlled player. T
 
 NPC AI Players structured directives: 
 
-Continuous Movement: NPCs should generally remain in motion, exploring the maze, only stopping if their pathfinding is temporarily broken or they are in a "safe" recalculation state. Movement should be smoothe for the AI not jittery.
+Continuous Movement: NPCs should generally remain in motion, exploring the maze, only stopping if their pathfinding is temporarily broken or they are in a "safe" recalculation state. The NPC AI should have a complete view of the maze so it can navigate the environment without relying on ingame senses entirly Movement should be smoothe for the AI not jittery.
 Dead-End Avoidance: NPCs must be capable of recognizing and escaping dead-end paths. If stuck, they should be able to turn around and select an alternative route. This is particularly important when under threat.
+
+##### **Maze Understanding:** The AI player will have a complete view of the generated maze and all its pathways, This enables the AI player to avoid dead ends and stucture its pathfinding based on an overall view of the maze, Their relation to the player and other AI players, And 
 
 ##### Threat Identification:
 
@@ -212,19 +225,6 @@ Manage Dead-End Paths: The Growing Tree algorithm, especially when configured to
 Introduce Loops: Within these edge regions, introduce loops. This can be achieved by adapting concepts from a modified Kruskal's algorithm (using a "cycle bias" to remove additional walls within this zone) or by targeted random wall removal (similar to the openDeadEndProbability or openArbitraryProbability parameters from the Growing Tree variations, but specifically applied to the edge regions).
 Ensure Central Connectivity for Loops: This is critical. For each loop formed in the edge region, a pathfinding check (e.g., A* or BFS) must be performed from a cell within that loop back to any cell already established as part of the central area's connected network. If no such path exists, a new connecting path must be explicitly carved. This ensures the "connecting back to the central area" stipulation is met.
 
-#### Camera System:
-The camera will be a perspective camera, angled to give a 2.5D view.
-It will smoothly follow the player.
-The framing must prioritize the vertical view, showing more of the map ahead of and behind the player than to the sides.
-A key feature is that taller objects should be able to obscure the player if the player walks behind them, enhancing the sense of depth.
-#### Characters & Animation:
-The player character will have two basic animation states: "Idle" and "Running." The appropriate animation should play based on whether the character is moving.
-To simulate a multiplayer environment for this prototype, there will be three placeholder AI characters. These AI will wander the map randomly, also featuring idle/run animations and interacting with the collision and lighting systems just as a player would.
-3. User Interface (UI) - The Virtual Joystick
-The UI must be minimal and highly functional. The virtual joystick is the centerpiece.
-Unobtrusive Design: It should have adjustable transparency, becoming more opaque when in use and fading when idle.
-Ergonomic Placement: Positioned at the bottom-center for comfortable thumb access during single-handed play.
-Configurable: The size, dead zone, and transparency levels (active vs. inactive) must be adjustable from the Unity Inspector to allow for fine-tuning the feel of the controls.
 
 
 
