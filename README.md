@@ -6,7 +6,11 @@ To develop a technical prototype for a Unity-based mobile game for iOS. This pro
 
 ## High-Level Concept
 
-The game is a top-down 2.5D action game where the player controls a ghost character on a procedurally generated maze map. The primary user experience is built around exploration and navigation of this maze, While attempting to "catch" or "tag" the NPC AI Players and eventually other humans with multiplayer functionality. The game involves one human-controlled character whose objective is to "tag" three NPC AI characters within a procedurally generated maze. The human player tags the other NPC AI Players by running into them & pressing the tag button at which point they disappear in a cloud of smoke. 
+The game is a top-down 2.5D action game where the player controls a ghost character on a procedurally generated maze map. The primary user experience is built around exploration and navigation of this maze, While attempting to "catch" or "tag" the NPC AI Players and eventually other humans with multiplayer functionality. The game involves one human-controlled character whose objective is to "tag" three NPC AI characters within a procedurally generated maze. The human player tags the other NPC AI Players by running into them & pressing the tag button at which point they disappear in a cloud of smoke. The human player (Tagger) have slightly faster movement speed than the NPC AI Players (Taggy) - This is to enable the "tagger" player to catch up to the "taggy" players. 
+
+Definition: In this scenario the human player refers to the human operator of the game, In future implementations multiplayer will be a feature so keep in mind "the human player" refers to the "tagging" player with the ability to tag and eliminate "taggys players"
+
+Definition: In this scenarion the NPC AI Player refers to the autonumous game AI that will be implemented in this build, In future implementations the "NPC AI Player" will not tie directly to the "taggys players". In this build of the game it will.
 
 Inspiration: The primary inspiration is "Among Us." We are specifically focused on emulating its:
 - Movement & Animation Style: Simple, fluid 8-directional movement with distinct idle and running animations.
@@ -22,7 +26,7 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - Tagging NPC AI Players is handled by a "tag" button that appears situationally in the middle of the screen to the right above and to the right of the virtual joystick. 
 - Keyboard controls (WASD/Arrows/E to "tag") must also be implemented for easy testing within the Unity Editor.
 
-#### We have worked to the stable state of the project. The current working features are:
+#### In the current build of the project, The working features are:
 - A player character with advanced movement (acceleration and deceleration).
 - A responsive virtual joystick and keyboard controls.
 - Player animations with dynamic speed and correct sprite flipping.
@@ -30,17 +34,48 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - AI animations with dynamic speed and correct sprite flipping.
 - A smooth camera that follows the player.
 
+#### What needs to be implemented in this build for further testing, Not the full functionalty:
+- AI functionality described below - In future builds we will implement a difficulty setting so this should be considered when implementing the AI in this build
+- Procedural Maze Generation Functionality as described below
+- Tagging mechanic, Tagging button, a scoring system to count the number of NPC AI Players that the Human Player has Tagged
+- A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last NPC AI Player is tagged and the game finishes
+- UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
+  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation 
+
+#### What needs to be implemented for full game build functionality and publishing:
+- Player colors. Multiple sprite animations with different colors
+- iOS performance optimisations for running on device (iPhone Latest Release)
+- Gamesounds, Player walking "tip-tap" 
+- Full game menu with Start Menu, Credits, Settings= Difficulty settings for the NPC AI Players, Sound on/off. In game settings Pause menu, Continue, Restart, Quit to main menu. 
+- 
+
+#### What needs to be implemented after release, For further updates:
+- Multiplayer Functionality (Netcode)
+  - Proximity based voice chat
+  - Netcode implementation - Rollback netcode
+  - Account systems - Using apple game account for account services, Allows players to account manage externally, Implement into unity game 
+  - Automatically random selection sorting players into the "tagger" 1 player and the "taggys" 3 players
+  - Servers - Hosted on AWS or Azure and implementing regions for optimal netplay
+  - expanded animations for cosmetic items ontop of 
+  - NPC AI Player & Human Player game mixing - Larger player counts
+- Game Menu options for servers/auto join. 
+
+
 #### AI Implementation:
 
 Right now we are focusing on building the NPC AI Characters. This Game AI should be a technical demonstration of how game AI Pathfinding & nonvisual sensory mechanics works on an edge device like the iPhone. Before we implement the Maze generation element of the project, We need to get the AI characters working as outlined below. This AI is designed for threat detection, avoidance, continuous movement, and short-term decision making coupled with long-term maze pathfinding. The NPC characters are not passive targets; they are intelligent agents designed to actively evade the player and navigate the maze effectively. Their behavior will be governed by a set of core mechanics:
 
 ##### General Purpose
 
-**Player Avoidance:** The primary directive is to avoid being tagged by the human-controlled player.
+**Player Avoidance:** 
+The primary directive is to avoid being tagged by the human-controlled player. The goal is for the NPC Player AI to stay away from the human player, Keep moving continuously as much as possible, and ultimately remain "untagged" for as long as possible. The human player (Tagger) have slightly faster movement speed than the NPC AI Players (Taggy) - This is to enable the "tagger" player to catch up to the "taggy" players. The NPC AI Players have variable movement speed using the animation system already implemented in the current build, Using that system to dynamically adjust the NPC AI Players speed and animation rate based on the mechanics below.
+
+NPC AI Players structured directives: 
+
 Continuous Movement: NPCs should generally remain in motion, exploring the maze, only stopping if their pathfinding is temporarily broken or they are in a "safe" recalculation state. Movement should be smoothe for the AI not jittery.
 Dead-End Avoidance: NPCs must be capable of recognizing and escaping dead-end paths. If stuck, they should be able to turn around and select an alternative route. This is particularly important when under threat.
 
-##### Threat Identification
+##### Threat Identification:
 
 **Human Player:** The human player is the primary and highest threat.
 Fellow NPCs: Other NPC characters are considered a much lower threat, just obstacles to navigate around rather than entities to actively evade unless they obstruct a critical escape path.
@@ -58,7 +93,7 @@ Intensified Avoidance (Sensed)=
 All these states should be adjustable/customizable in the unity inspector by adding variables at the beginning of the code - This should be a big priority when writing the NPC AI code.
 NPCs will perceive their environment and the player through a primary non visual sensory systems:
 
-##### Player "Sense" (Non-Visual)
+##### Player "Sense" (Non-Visual):
 
 **Mechanism:** This is a unique, non-visual detection system. An invisible circular "aura" or "scent" emanates from the player character every frame. This aura can be conceptualized as a Gaussian blur effect in terms of its diminishing strength with distance.
 
@@ -101,8 +136,11 @@ Tilemap colliders can be automatically generated based on the tile data, providi
 The choice of NativeArray for the primary generation logic is driven by performance needs, particularly for runtime generation on iOS. Direct array manipulation is generally faster than continuous interaction with Unity GameObjects or complex Tilemap APIs during the computationally intensive phases of maze creation.7
 Step-by-Step Generation Process (Hybrid Growing Tree & Post-Processing)
 The recommended generation pipeline involves several sequential steps:
+
 ##### 1. Initialization:
+
 Create the 30x30 NativeArray<CellData>, initializing all cells to an "unvisited" state with all potential passages closed (i.e., all walls intact between cells).
+
 ##### 2. Base Maze Generation (Growing Tree Algorithm):
 Implement the core maze carving using the Growing Tree algorithm, structured as a Unity IJob and compiled with Burst for maximum efficiency.
 Inputs: A random seed for reproducibility, and a pickLastProbability float (0.0 to 1.0) to control the cell selection strategy (high values lean towards DFS-like long corridors; lower values towards Prim's-like shorter branches).
