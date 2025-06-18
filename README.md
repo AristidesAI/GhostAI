@@ -8,9 +8,9 @@ To develop a technical prototype for a Unity-based mobile game for iOS. This pro
 
 The game is a top-down 2.5D action game where the player controls a ghost character on a procedurally generated maze map. The primary user experience is built around exploration and navigation of this maze, While attempting to "catch" or "tag" the NPC AI Players and eventually other humans with multiplayer functionality. The game involves one human-controlled character whose objective is to "tag" three NPC AI characters within a procedurally generated maze. The human player tags the other NPC AI Players by running into them & pressing the tag button at which point they disappear in a cloud of smoke. The human player (Tagger) have slightly faster movement speed than the NPC AI Players (Taggy) - This is to enable the "tagger" player to catch up to the "taggy" players. 
 
-Definition: In this scenario the human player refers to the human operator of the game, In future implementations multiplayer will be a feature so keep in mind "the human player" refers to the "tagging" player with the ability to tag and eliminate "taggys players"
+###### Definition: In this scenario the human player refers to the human operator of the game, In future implementations multiplayer will be a feature so keep in mind "the human player" refers to the "tagging" player with the ability to tag and eliminate "taggys players"
 
-Definition: In this scenarion the NPC AI Player refers to the autonumous game AI that will be implemented in this build, In future implementations the "NPC AI Player" will not tie directly to the "taggys players". In this build of the game it will.
+###### Definition: In this scenarion the NPC AI Player refers to the autonumous game AI that will be implemented in this build, In future implementations the "NPC AI Player" will not tie directly to the "taggys players". In this build of the game it will.
 
 Inspiration: The primary inspiration is "Among Us." We are specifically focused on emulating its:
 - Movement & Animation Style: Simple, fluid 8-directional movement with distinct idle and running animations.
