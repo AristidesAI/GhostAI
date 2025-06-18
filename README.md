@@ -26,7 +26,7 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - Tagging NPC AI Players is handled by a "tag" button that appears situationally in the middle of the screen to the right above and to the right of the virtual joystick. 
 - Keyboard controls (WASD/Arrows/E to "tag") must also be implemented for easy testing within the Unity Editor.
 
-#### In the current build of the project, The working features are:
+#### Build 1.0.1 In the current build of the project, The working features are:
 - A player character with advanced movement (acceleration and deceleration).
 - A responsive virtual joystick and keyboard controls.
 - Player animations with dynamic speed and correct sprite flipping.
@@ -34,7 +34,7 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - AI animations with dynamic speed and correct sprite flipping.
 - A smooth camera that follows the player.
 
-#### What needs to be implemented in this build for further testing, Not the full functionalty:
+#### Build 2.0.1 What needs to be implemented in this build for further testing, Not the full functionalty:
 - AI functionality described below - In future builds we will implement a difficulty setting so this should be considered when implementing the AI in this build
 - Procedural Maze Generation Functionality as described below
 - Tagging mechanic, Tagging button, a scoring system to count the number of NPC AI Players that the Human Player has Tagged
@@ -42,7 +42,7 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
   - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation 
 
-#### What needs to be implemented for full game build functionality and publishing:
+#### Build 3.0.1 What needs to be implemented for full game build functionality and publishing:
 - Player colors. Multiple sprite animations with different colors
 - iOS performance optimisations for running on device (iPhone Latest Release)
 - Gamesounds, Player walking "tip-tap" 
