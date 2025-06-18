@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Obstacles
-  - 
+  - Targets
   - 
   - 
   - 
@@ -47,8 +47,14 @@ TagManager:
   - name: Midground
     uniqueID: 843265371
     locked: 0
+  - name: Vision
+    uniqueID: 145380875
+    locked: 0
   - name: Player
     uniqueID: 1967627761
+    locked: 0
+  - name: Fog
+    uniqueID: 3908840737
     locked: 0
   - name: Foreground
     uniqueID: 3296511087
