@@ -46,6 +46,7 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
 - UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
   - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation
 - Tagging mechanic, Tagging button, a scoring system to count the number of AI Players that the Human Player has Tagged
+- more robust camera system that followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are viewable on screen at all times - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range 
 
 #### Build 3.0.1 What needs to be implemented in the next build for further testing, Not the full functionalty:
 
@@ -73,17 +74,55 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
 
 #### UI Components:
 
-The Game has a starting menu, with 3 buttons, the game title "Ghost.AI" at the top middle centered 25% from the top of the screen
-an animated background of the game AI running around in a circle that plays on a loop behind the game menu UI elements, The Virtual Joystick element and the Pause Button element fade into view when the game session starts
-The three buttons appear in 1 column, first option “Start” (Starts the game session) second option “Reset” which restarts the game from scratch, third option “Color” lets Players select their players color. 
+The Game has a starting menu [ with 2 buttons, the game title "Ghost.AI" at the top middle centered 22% from the top of the screen - behind the "Ghost.AI" title and the buttons is a white background ] 
 
-The Color button changes the players sprite set with a corresponding identical set with different solid colors the sprites will be set up as assets>sprites>%% . 
+The Virtual Joystick element and the Pause Button element are hidden and fade into view when the game session starts, the white background fades out and the buttons and title disapear 
 
-#### AI Implementation:
+The 2 buttons appear in 1 column 30% from the bottom of the game title, the buttons are seperated by 5% from the bottom to the top of the next in order
+
+Start
+Color
+
+first option “Start” (Starts the game session) - makes the starting menu
+second option “Color” lets (Players select their players color) and it changes the color of the onscreen idle character on the menu.
+
+The Color button changes the players sprite set with a corresponding identical set with different solid colors the sprites will be set up as assets>sprites>%colornamefolder%> (sprites of the running and idle animations but in different colors). When the sprites are not in the required folders use the default sprite model 
+
+For testing the UI components like the menu, color option and the restart option should have lots of unity [SerializeField] 
+
+**Player Timer & Pause Button:**
+
+Timing System Feature: A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last AI Player is tagged and the game finishes. 
+At the end of the game the time is displayed where the game title appears, the the game resets (timer disapears reset game logic to the beginning) and fades back to the title screen 
+timer is a semi transparent floating counter that appears in the left notch display area 
+
+Pause Button Feature: The pause button is a square semi transparent floating clickable element that appears in the right notch display area  
+When the game is paused there are 2 button clickable elements "continue" which unpauses the game and returns to gameplay "restart" which resets the game fading back to the title screen 
+On the top of the iOS display it should look like this: {Timer} left side of apple notch {apple notch element} right side of apple notch {Pause button} 
+
+For testing the timer mechanic should have lots of unity [SerializeField] 
+For testing the pause button mechanic should have lots of unity [SerializeField] 
+
+#### Tagging Mechanic
+
+The player "tagger" tags/catches the other AI Players "taggys" by running within a close enough range & pressing the tag button at which point they disappear in a cloud of smoke. Use the killing mechanic that the "imposter" character in "among us" has as a reference. The tagging mechanic is inspired by the kill mechanic in the game "Among Us" - When the player "tagger" gets in a certain range the tag button appears more visible and less transparent indicating a "tag" can take place when the player clicks on/presses the tag button on screen the AI player in range is "tagged" and eliminated. A puff of smoke frame by frame animation takes place ontop of the AI player and they disappear, That AI player "taggy" has been eliminated from the round. 
+In the event the "tagger" player is in range of 2 "taggy" AI players, the closer "taggy" player is selected and tagged and eliminated. When the tag animation occours, The camera should dynamically zoom to the new range while the animation is playing and not linger on the eliminated AI player. When you are implementing this feature - make sure you follow the guide of making it function like for like with the among us killing mechanic. 
+
+For testing the tagging mechanic should have lots of unity [SerializeField] 
+
+#### Camera System 
+
+Camera system that smoothly followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are visible on screen the edge of the screen at all times, the zoom should be pushed into the viewscreen to a certain range so that the audience can see the AI players and a small area of them to better see the AI players and their animations, to accomodate the tagging purpose of the game & to accomodate the later maze funtionality. The zoom should be smooth, clean, and adjustable in the unity editor - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range. The camera should follow the human player and change the zoom range and zoom speed very slowly so as not to confuse the players sense of space in the game, this is also to make chasing the AI players easier as zooming the camera in and out too broadly and too fast will make tracking both the players own movements and the AI players movements difficult
+
+For testing the camera system should have lots of unity [SerializeField]
+
+##### **Everything below here should be implemented in later builds: 3.0.1##**
+
+#### AI Implementation: 
 
 Right now we are focusing on building the NPC AI Characters. This Game AI should be a technical demonstration of how game AI Pathfinding & nonvisual sensory mechanics works on an edge device like the iPhone. Before we implement the Maze generation element of the project, We need to get the AI characters working as outlined below. This AI is designed for threat detection, avoidance, continuous movement, and short-term decision making coupled with long-term maze pathfinding. The NPC characters are not passive targets; they are intelligent agents designed to actively evade the player and navigate the maze effectively. Their behavior will be governed by a set of core mechanics:
 
-##### General Purpose
+##### General Purpose 
 
 **Player Avoidance:** 
 The primary directive is to avoid being tagged by the human-controlled player. The goal is for the NPC Player AI to stay away from the human player, Keep moving continuously as much as possible, and ultimately remain "untagged" for as long as possible. The human player (Tagger) have slightly faster movement speed than the NPC AI Players (Taggy) - This is to enable the "tagger" player to catch up to the "taggy" players. The NPC AI Players have variable movement speed using the animation system already implemented in the current build, Using that system to dynamically adjust the NPC AI Players speed and animation rate based on the mechanics below.
