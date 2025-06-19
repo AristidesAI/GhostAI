@@ -42,16 +42,16 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
 
 #### Build 2.0.1 What needs to be implemented in this build for further testing, Not the full functionalty:
 
-- Procedural Maze Generation Functionality as described below, this is required for the AI functionality to work properly with the maze system. The AI player needs to have a full view of the maze generation and its pathways. The AI scripts and Maze generation scripts should talk to one another 
-- AI functionality described below - In future builds we will implement a difficulty setting so this should be considered when implementing the AI in this build
-- Tagging mechanic, Tagging button, a scoring system to count the number of NPC AI Players that the Human Player has Tagged
+- A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last AI Player is tagged and the game finishes
+- UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
+  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation
+- Tagging mechanic, Tagging button, a scoring system to count the number of AI Players that the Human Player has Tagged
 
 #### Build 3.0.1 What needs to be implemented in the next build for further testing, Not the full functionalty:
 
-- A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last NPC AI Player is tagged and the game finishes
-- UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Start Game. Pause. Continue. Quit.
-  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation
-    
+- Procedural Maze Generation Functionality as described below, this is required for the AI functionality to work properly with the maze system. The AI player needs to have a full view of the maze generation and its pathways. The AI scripts and Maze generation scripts should talk to one another 
+- AI functionality described below - In future builds we will implement a difficulty setting so this should be considered when implementing the AI in this build
+  
 #### Build 4.0.1 What needs to be implemented for full game build functionality and publishing:
 
 - Player colors. Multiple sprite animations with different colors
@@ -71,6 +71,13 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
   - NPC AI Player & Human Player game mixing - Larger player counts
 - Game Menu options for servers/auto join. 
 
+#### UI Components:
+
+The Game has a starting menu, with 3 buttons, the game title "Ghost.AI" at the top middle centered 25% from the top of the screen
+an animated background of the game AI running around in a circle that plays on a loop behind the game menu UI elements, The Virtual Joystick element and the Pause Button element fade into view when the game session starts
+The three buttons appear in 1 column, first option “Start” (Starts the game session) second option “Reset” which restarts the game from scratch, third option “Color” lets Players select their players color. 
+
+The Color button changes the players sprite set with a corresponding identical set with different solid colors the sprites will be set up as assets>sprites>%% . 
 
 #### AI Implementation:
 
@@ -208,7 +215,7 @@ This step effectively "draws" the maze in the Unity scene.19
 The order of these operations is paramount. For instance, carving the central room before ensuring general connectivity might simplify some logic, but doing it after base maze generation (as suggested) necessitates a robust connectivity pass. Edge loops should be formed after the central hub and its main arteries are established to ensure they can meaningfully connect to this core structure.
 Techniques for Post-Generation Refinement to Guarantee All Specifications
 To ensure all specifications are met robustly:
-**Connectivity Analysis (BFS/DFS): ** As detailed, these are fundamental for verifying that the central area is the nexus of the maze and that edge loops are not isolated.
+**Connectivity Analysis (BFS/DFS):** As detailed, these are fundamental for verifying that the central area is the nexus of the maze and that edge loops are not isolated.
 Rule-Based Checks: After each significant generation or modification step, programmatic checks should verify key constraints. For example: "Is the central area of the minimum specified openness?", "Does each identified edge loop possess at least one path leading to the reachableCells network?".
 **Targeted Path Carving:** If a required connection is found to be missing (e.g., an edge loop is isolated), a specific path-carving routine can be invoked. This routine would use A* or a simple line-drawing algorithm to identify the cells between the two points to be connected and change their type from Wall to Passage.
 Iterative Refinement Loop: For particularly complex interactions between features, it might be necessary to allow the generator to iterate. If an initial pass at creating edge loops results in poor connectivity, the system could discard those loops and try generating them with slightly different parameters or starting points, or apply a more aggressive connection-forcing step.
