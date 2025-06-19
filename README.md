@@ -79,14 +79,14 @@ On the top of the iOS display it should look like this: {Timer} left side of app
 For testing the timer mechanic should have lots of unity [SerializeField] 
 For testing the pause button mechanic should have lots of unity [SerializeField] 
 
-**Tagging Mechanic**
+**Tagging Mechanic:**
 
 The player "tagger" tags/catches the other AI Players "taggys" by running within a close enough range & pressing the tag button at which point they disappear in a cloud of smoke. Use the killing mechanic that the "imposter" character in "among us" has as a reference. The tagging mechanic is inspired by the kill mechanic in the game "Among Us" - When the player "tagger" gets in a certain range the tag button appears more visible and less transparent indicating a "tag" can take place when the player clicks on/presses the tag button on screen the AI player in range is "tagged" and eliminated. A puff of smoke frame by frame animation takes place ontop of the AI player and they disappear, That AI player "taggy" has been eliminated from the round. 
 In the event the "tagger" player is in range of 2 "taggy" AI players, the closer "taggy" player is selected and tagged and eliminated. When the tag animation occours, The camera should dynamically zoom to the new range while the animation is playing and not linger on the eliminated AI player. When you are implementing this feature - make sure you follow the guide of making it function like for like with the among us killing mechanic. 
 
 For testing the tagging mechanic should have lots of unity [SerializeField] 
 
-**Camera System**
+**Camera System:**
 
 Camera system that smoothly followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are visible on screen the edge of the screen at all times, the zoom should be pushed into the viewscreen to a certain range so that the audience can see the AI players and a small area of them to better see the AI players and their animations, to accomodate the tagging purpose of the game & to accomodate the later maze funtionality. The zoom should be smooth, clean, and adjustable in the unity editor - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range. The camera should follow the human player and change the zoom range and zoom speed very slowly so as not to confuse the players sense of space in the game, this is also to make chasing the AI players easier as zooming the camera in and out too broadly and too fast will make tracking both the players own movements and the AI players movements difficult
 
