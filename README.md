@@ -39,49 +39,36 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
 - Game layers: Background|Midground|Player|Obstacles|Foreground 
 - AI animations with dynamic speed and correct sprite flipping.
 - A smooth camera that follows the player.
+- A game timer that counts up from 0 when the software runs
+- Debugmanager that displays information about the players movements 
 
 #### Build 2.0.1 What needs to be implemented in this build for further testing, Not the full functionalty:
 
-- A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last AI Player is tagged and the game finishes (Described further Below)
-- UI system for basic game menu functionality, Pause & Unpause functionality, quit to main menu functionality - Main Menu. Color. Start Game. Pause. Continue. Quit. (Described further Below)
-  - Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation (Described further Below)
-- Tagging mechanic, Tagging button, a scoring system to count the number of AI Players that the Human Player has Tagged (Described further Below)
+
+- Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation (Described further Below)
+- Tagging mechanic, Tagging button, game restarting to begginning after all AI players are tagged (Described further Below)
 - more robust camera system that followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are viewable on screen at all times - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range (Described further Below)
 
-**UI Components:**
-
-The Game has a starting menu [ with 2 buttons, the game title "Ghost.AI" at the top middle centered 22% from the top of the screen - behind the "Ghost.AI" title and the buttons is a white background ] 
-
-The Virtual Joystick element and the Pause Button element are hidden and fade into view when the game session starts, the white background fades out and the buttons and title disapear 
-
-The 2 buttons appear in 1 column 30% from the bottom of the game title, the buttons are seperated by 5% from the bottom to the top of the next in order
-
-Start
-Color
-
-first option “Start” (Starts the game session) - makes the starting menu
-second option “Color” lets (Players select their players color) and it changes the color of the onscreen idle character on the menu.
-
-The Color button changes the players sprite set with a corresponding identical set with different solid colors the sprites will be set up as assets>sprites>%colornamefolder%> (sprites of the running and idle animations but in different colors). When the sprites are not in the required folders use the default sprite model 
-
-For testing the UI components like the menu, color option and the restart option should have lots of unity [SerializeField] 
 
 **Player Timer & Pause Button:**
 
-Timing System Feature: A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last AI Player is tagged and the game finishes. 
+Already Implemented - {Timing System Feature: A timing system, Where the overall game time is measured, Appearing as a timer counting up from when the game starts, To when the last AI Player is tagged and the game finishes. 
 At the end of the game the time is displayed where the game title appears, the the game resets (timer disapears reset game logic to the beginning) and fades back to the title screen 
-timer is a semi transparent floating counter that appears in the left notch display area 
+timer is a semi transparent floating counter that appears in the left notch display area}
 
 Pause Button Feature: The pause button is a square semi transparent floating clickable element that appears in the right notch display area  
-When the game is paused there are 2 button clickable elements "continue" which unpauses the game and returns to gameplay "restart" which resets the game fading back to the title screen 
-On the top of the iOS display it should look like this: {Timer} left side of apple notch {apple notch element} right side of apple notch {Pause button} 
+When the game is paused, The gametimer should stop at its current time, when the pause button is pressed again the timer continues where it stopped and continues counting up. When the pause button is pressed the display area is blurred and there are 2 button clickable elements 
+First button "continue" which unpauses the game restarts the timer & returns to gameplay unbluring the display area back to full view.
+Second button "restart" which resets the game to it original state.
 
-For testing the timer mechanic should have lots of unity [SerializeField] 
 For testing the pause button mechanic should have lots of unity [SerializeField] 
 
 **Tagging Mechanic:**
 
-The player "tagger" tags/catches the other AI Players "taggys" by running within a close enough range & pressing the tag button at which point they disappear in a cloud of smoke. Use the killing mechanic that the "imposter" character in "among us" has as a reference. The tagging mechanic is inspired by the kill mechanic in the game "Among Us" - When the player "tagger" gets in a certain range the tag button appears more visible and less transparent indicating a "tag" can take place when the player clicks on/presses the tag button on screen the AI player in range is "tagged" and eliminated. A puff of smoke frame by frame animation takes place ontop of the AI player and they disappear, That AI player "taggy" has been eliminated from the round. 
+The player "tagger" tags/catches the other AI Players "taggys" by running within a close enough range & pressing the tag button at which point they disappear in a cloud of smoke. Use the killing mechanic that the "imposter" character in "among us" has as a reference. When implementing the tagging mechanic, Look at how the kill mechanic works for imposter players in Among Us. The tagging mechanic is inspired by the kill mechanic in the game "Among Us" - When the player "tagger" gets in a certain range the tag button appears more visible and less transparent indicating a "tag" can take place when the player clicks on/presses the tag button on screen the AI player in range is "tagged" and eliminated. A puff of smoke frame by frame animation takes place ontop of the AI player and they disappear, That AI player "taggy" has been eliminated from the round. 
+
+The Tag mechanic is implemented with an onscreen button - this button appears highly transparent and non-interactable while there are no AI Players in range of the Human Player. When the human player is in a certain circular radius of an AI Player, the Tag button becomes less transparent and interactable. When the tag button is pressed by the player - AI player that was in range of the human player is eliminated from the round and will disapear. 
+
 In the event the "tagger" player is in range of 2 "taggy" AI players, the closer "taggy" player is selected and tagged and eliminated. When the tag animation occours, The camera should dynamically zoom to the new range while the animation is playing and not linger on the eliminated AI player. When you are implementing this feature - make sure you follow the guide of making it function like for like with the among us killing mechanic. 
 
 For testing the tagging mechanic should have lots of unity [SerializeField] 
@@ -89,6 +76,9 @@ For testing the tagging mechanic should have lots of unity [SerializeField]
 **Camera System:**
 
 Camera system that smoothly followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are visible on screen the edge of the screen at all times, the zoom should be pushed into the viewscreen to a certain range so that the audience can see the AI players and a small area of them to better see the AI players and their animations, to accomodate the tagging purpose of the game & to accomodate the later maze funtionality. The zoom should be smooth, clean, and adjustable in the unity editor - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range. The camera should follow the human player and change the zoom range and zoom speed very slowly so as not to confuse the players sense of space in the game, this is also to make chasing the AI players easier as zooming the camera in and out too broadly and too fast will make tracking both the players own movements and the AI players movements difficult
+
+The existing main camera uses this script
+
 
 For testing the camera system should have lots of unity [SerializeField]
 
