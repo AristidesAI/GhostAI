@@ -444,8 +444,6 @@
 "Assets/_Scripts/CameraController.cs"
 "Assets/_Scripts/DebugPanel.cs"
 "Assets/_Scripts/GameTimer.cs"
-"Assets/_Scripts/MainMenuUIManager.cs"
-"Assets/_Scripts/PauseMenuManager.cs"
 "Assets/_Scripts/PlayerAnimation.cs"
 "Assets/_Scripts/PlayerController.cs"
 "Assets/_Scripts/VirtualJoystick.cs"
