@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     public Vector3 offset = new Vector3(0, 5, -10);
     
     [Tooltip("The speed at which the camera follows the player. Lower values are smoother.")]
-    [Range(0.01f, 1.0f)]
+    [Range(0.01f, 2.0f)]
     public float smoothSpeed = 0.125f;
 
 
