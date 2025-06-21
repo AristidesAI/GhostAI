@@ -16,6 +16,7 @@ Inspiration: The primary inspiration is "Among Us." We are specifically focused 
 - Movement & Animation Style: Simple, fluid 8-directional movement with distinct idle and running animations.
 - 2.5D Camera Perspective: A top-down view that still provides a sense of depth.
 - The killing gameplay mechanic, where a player is close enough to another player a Kill or in this case Tag option appears and the player can execute a tag action, eliminating the NPC AI Player
+
 ###### a significant change from the inspiration is the vertical viewport. All gameplay, UI, and camera work must be optimized for a portrait orientation on an iPhone.
 
 ## Core Gameplay Features & Mechanics
@@ -45,8 +46,10 @@ The player character & AI Player has two basic animation states: "Idle" and "Run
 #### Build 2.0.1 What needs to be implemented in this build for further testing, Not the full functionalty:
 
 
-- Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen. coding for a "button press" animation (Described further Below)
-- Tagging mechanic, Tagging button, game restarting to begginning after all AI players are tagged (Described further Below)
+- Pause Button in the top right hand corner of the screen, Highly transparent as to allow visibility of the viewscreen while the game is running. (Described further Below)
+
+- Tagging mechanic, Tagging button, game finishes when all AI players are tagged (Described further Below)
+
 - more robust camera system that followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are viewable on screen at all times - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range (Described further Below)
 
 The timer mechanic has already been implemented and the script is found here My project/Assets/_Scripts/GameTimer.cs
@@ -54,9 +57,7 @@ The timer mechanic has already been implemented and the script is found here My 
 **Pause Button:**
 
 Pause Button Feature: The pause button is a square semi transparent floating clickable element that appears in the right notch display area  
-When the game is paused, The gametimer should stop at its current time, when the pause button is pressed again the timer continues where it stopped and continues counting up. When the pause button is pressed the display area is blurred and there are 2 button clickable elements 
-First button "continue" which unpauses the game restarts the timer & returns to gameplay unbluring the display area back to full view.
-Second button "restart" which resets the game to it original state.
+When the game is paused, The gametimer should stop at its current time Pause the gamestate, when the pause button is pressed again the timer continues where it stopped and continues counting up. When the pause buttons is pressed again the gamestate unpauses and the game continues
 
 The timer mechanic has already been implemented and the script is found here My project/Assets/_Scripts/GameTimer.cs - Use the existing script to assist in building the Pause Button Mechanic
 
@@ -70,20 +71,15 @@ The Tag mechanic is implemented with an onscreen button - this button appears hi
 
 In the event the "tagger" player is in range of 2 "taggy" AI players, the closer "taggy" player is selected and tagged and eliminated. When the tag animation occours, The camera should dynamically zoom to the new range while the animation is playing and not linger on the eliminated AI player. When you are implementing this feature - make sure you follow the guide of making it function like for like with the among us killing mechanic. 
 
-For testing the tagging mechanic should have lots of unity [SerializeField] 
+For testing the tagging mechanic should have lots of unity [SerializeField]-plural
+the current AI script exists here My project/Assets/_Scripts/AIController.cs in the github repo - ensure any code implementing the tag mechanic is using the existing AI controllers logic to divise the method. If you need to make changes to the AI Controller script, Document them with comments and make sure any changes includes lots of unity [SerializeField]-plural 
 
 **Camera System:**
 
 Camera system that smoothly followers the human players "taggers" movement but zooms in and out dynamically to frame in the AI players so they are visible on screen the edge of the screen at all times, the zoom should be pushed into the viewscreen to a certain range so that the audience can see the AI players and a small area of them to better see the AI players and their animations, to accomodate the tagging purpose of the game & to accomodate the later maze funtionality. The zoom should be smooth, clean, and adjustable in the unity editor - When an AI Player "taggy" is tagged and eliminated the camera should smoothly zoom in and out dynamically to accomodate the new number of AI players on screen and thus the new zoom range. The camera should follow the human player and change the zoom range and zoom speed very slowly so as not to confuse the players sense of space in the game, this is also to make chasing the AI players easier as zooming the camera in and out too broadly and too fast will make tracking both the players own movements and the AI players movements difficult
 
-The existing main camera uses this script exists in this repo in My project/Assets/_Scripts/CameraController.cs - Change this camera system to implement these new features. 
+The existing main camera uses this script in this repo in My project/Assets/_Scripts/CameraController.cs - Change this camera system to implement these new features. 
 
 
-For testing the camera system should have lots of unity [SerializeField]
+For testing the camera system should have lots of unity [SerializeField]-plural
 
-
-
-
-
-## Artwork Concepts
-![Idle](PrototypeAssets/GhostiOSIcons/Ghost.AI-iOS-ClearDark-1024x1024@2x.png)
