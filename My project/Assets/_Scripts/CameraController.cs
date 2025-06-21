@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     public Transform target;
 
     [Header("Camera Behavior")]
-    [Tooltip("The positional offset from the target (e.g., X=0, Y=5, Z=-10). This defines the camera angle and distance.")]
+    [Tooltip("The positional offset from the target (e.g., X=0, Y= -25, Z=-10). This defines the camera angle and distance.")]
     public Vector3 offset = new Vector3(0, 5, -10);
     
     [Tooltip("The speed at which the camera follows the player. Lower values are smoother.")]

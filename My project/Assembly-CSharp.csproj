@@ -48,6 +48,8 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/6000.1.7f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/_Scripts/GameTimer.cs" />
+    <Compile Include="Assets/_Scripts/DebugPanel.cs" />
     <Compile Include="Assets/_Scripts/CameraController.cs" />
     <Compile Include="Assets/_Scripts/PlayerController.cs" />
     <Compile Include="Assets/_Scripts/VirtualJoystick.cs" />
@@ -1041,10 +1043,6 @@
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PsdPlugin">
